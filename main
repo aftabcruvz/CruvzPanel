@@ -1,0 +1,14 @@
+from fastapi import FastAPI, Depends
+from routers import auth, domains, databases, files, monitoring
+
+app = FastAPI(title="Mini Hosting Panel")
+
+app.include_router(auth.router, prefix="/auth")
+app.include_router(domains.router, prefix="/domains")
+app.include_router(databases.router, prefix="/databases")
+app.include_router(files.router, prefix="/files")
+app.include_router(monitoring.router, prefix="/monitoring")
+
+@app.get("/")
+def root():
+    return {"message": "Welcome to Mini Hosting Panel"}
